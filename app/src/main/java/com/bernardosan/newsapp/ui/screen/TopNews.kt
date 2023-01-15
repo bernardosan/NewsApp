@@ -1,6 +1,7 @@
 package com.bernardosan.newsapp.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,17 +29,24 @@ fun TopNews(navController: NavController){
         Text(text = "Top News", fontWeight = FontWeight.SemiBold)
         LazyColumn{
             items(MockNewsModel.topNewsList){
-                TopNewsItem(newsModel = it)
+                TopNewsItem(newsModel = it,
+                    onClick = {
+                        navController.navigate("Detail/${it.id}")
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-fun TopNewsItem(newsModel: NewsModel){
+fun TopNewsItem(newsModel: NewsModel, onClick: () -> Unit = {}){
     Box(modifier = Modifier
         .height(200.dp)
-        .padding(8.dp)){
+        .padding(8.dp)
+        .clickable {
+            onClick()
+        }){
         Image(painter = painterResource(id = newsModel.image),
             contentDescription = "",
             contentScale = ContentScale.FillBounds
@@ -51,7 +59,7 @@ fun TopNewsItem(newsModel: NewsModel){
             Spacer(modifier = Modifier.fillMaxHeight(0.7f))
             Surface(modifier = Modifier
                 .fillMaxSize()
-                .alpha(0.8f), color = Color.White) {
+                .alpha(0.7f), color = Color.White) {
                 Text(text = newsModel.title,
                     color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
@@ -72,7 +80,7 @@ fun TopNewsPreview(){
     TopNewsItem(newsModel =
         NewsModel(
             8,
-            R.drawable.namita,
+            R.drawable.tiger_king,
             author = "CBSBoston.com Staff",
             title = "Principal Beaten Unconscious At Dorchester School; Classes Canceled Thursday - CBS Boston",
             description = "Principal Patricia Lampron and another employee were assaulted at Henderson Upper Campus during dismissal on Wednesday.",

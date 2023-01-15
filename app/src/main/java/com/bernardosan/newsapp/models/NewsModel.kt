@@ -1,5 +1,6 @@
 package com.bernardosan.newsapp.models
 
+import android.net.Uri
 import com.bernardosan.newsapp.R
 
 data class NewsModel(

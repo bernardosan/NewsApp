@@ -7,7 +7,6 @@ object MockNewsModel {
     val topNewsList = listOf<NewsModel>(
         NewsModel(
             1,
-            R.drawable.tiger_king,
             author = "Raja Razek, CNN",
             title = "'Tiger King' Joe Exotic says he has been diagnosed with aggressive form of prostate cancer - CNN",
             description = "Joseph Maldonado, known as Joe Exotic on the 2020 Netflix docuseries \\\"Tiger King: Murder, Mayhem and Madness,\\\" has been diagnosed with an aggressive form of prostate cancer, according to a letter written by Maldonado.",
@@ -69,4 +68,10 @@ object MockNewsModel {
             publishedAt = "2021-11-04T01:55:00Z"
         )
     )
+
+    fun getNews(id: Int?): NewsModel{
+        return topNewsList.first{
+            it.id == id
+        }
+    }
 }

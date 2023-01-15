@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TopNews(navController = rememberNavController())
+                    NewsApp()
                 }
             }
         }
@@ -36,6 +36,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     NewsAppTheme {
-        TopNews(navController = rememberNavController())
+        NewsApp()
     }
 }
