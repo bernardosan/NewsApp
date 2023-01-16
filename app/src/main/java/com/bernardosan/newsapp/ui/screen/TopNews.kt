@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.bernardosan.newsapp.R
 import com.bernardosan.newsapp.mock.MockNewsModel
+import com.bernardosan.newsapp.mock.MockNewsModel.getTimeAgo
 import com.bernardosan.newsapp.models.NewsModel
 
 @Composable
@@ -55,7 +56,7 @@ fun TopNewsItem(newsModel: NewsModel, onClick: () -> Unit = {}){
             .wrapContentHeight(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = newsModel.publishedAt, color = Color.White, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 16.dp, start = 16.dp))
+            Text(text = MockNewsModel.stringToDate(newsModel.publishedAt).getTimeAgo(), color = Color.White, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 16.dp, start = 16.dp))
             Spacer(modifier = Modifier.fillMaxHeight(0.7f))
             Surface(modifier = Modifier
                 .fillMaxSize()

@@ -1,7 +1,10 @@
 package com.bernardosan.newsapp.mock
 
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import com.bernardosan.newsapp.R
 import com.bernardosan.newsapp.models.NewsModel
+import java.util.*
 
 object MockNewsModel {
     val topNewsList = listOf<NewsModel>(
@@ -73,5 +76,51 @@ object MockNewsModel {
         return topNewsList.first{
             it.id == id
         }
+    }
+
+    fun Date.getTimeAgo(): String{
+        val calendar = Calendar.getInstance()
+        calendar.time = this
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val currentCalendar = Calendar.getInstance()
+
+        val currentYear = currentCalendar.get(Calendar.YEAR)
+        val currentMonth = currentCalendar.get(Calendar.MONTH)
+        val currentDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
+        val currentHour = currentCalendar.get(Calendar.HOUR_OF_DAY)
+        val currentMinute = currentCalendar.get(Calendar.MINUTE)
+
+        return if (year < currentYear){
+            val interval = currentYear-year
+            if (interval == 1) "$interval year ago" else "$interval years ago"
+        } else if (month < currentMonth){
+                val interval = currentMonth-month
+                if (interval == 1) "$interval month ago" else "$interval years ago"
+        } else if (day < currentDay) {
+            val interval = currentDay - day
+            if (interval == 1) "$interval month ago" else "$interval years ago"
+        } else if (hour < currentHour){
+            val interval = currentHour-hour
+            if (interval == 1) "$interval hour ago" else "$interval hour ago"
+        } else {
+            val interval = currentMinute-minute
+            if (interval == 1) "$interval minute ago" else "$interval minute ago"
+        }
+
+    }
+
+    fun stringToDate(publishedAt: String): Date {
+        val date = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            SimpleDateFormat("yyyy-MM-DD'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
+        } else {
+            java.text.SimpleDateFormat("yyyy-MM-DD'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
+        }
+        return date
     }
 }
