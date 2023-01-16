@@ -1,5 +1,6 @@
 package com.bernardosan.newsapp.ui
 
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.navigation.NavType
@@ -19,6 +20,7 @@ fun NewsApp(){
 @Composable
 fun Navigation(){
     val navController = rememberNavController()
+    val scrollState = rememberScrollState()
     NavHost(navController = navController, startDestination = "TopNews"){
         composable("TopNews"){
             TopNews(navController = navController)
@@ -28,7 +30,7 @@ fun Navigation(){
         ){
             val id = it.arguments!!.getInt("newsId")
             val newsData = MockNewsModel.getNews(id)
-            DetailScreen(navController = navController, newsModel =  newsData)
+            DetailScreen(navController = navController, newsModel =  newsData, scrollState = scrollState)
         }
     }
 }
