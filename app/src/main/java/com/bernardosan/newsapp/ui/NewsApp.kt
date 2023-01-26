@@ -17,6 +17,7 @@ import com.bernardosan.newsapp.ui.screen.Categories
 import com.bernardosan.newsapp.ui.screen.DetailScreen
 import com.bernardosan.newsapp.ui.screen.Sources
 import com.bernardosan.newsapp.ui.screen.TopNews
+import com.bernardosan.savedinstancebundledemo.network.NewsManager
 import eu.tutorials.newsapp.components.BottomMenu
 
 @Composable
@@ -37,7 +38,10 @@ fun MainScreen(navController: NavHostController,scrollState: ScrollState) {
 
 
 @Composable
-fun Navigation(navController:NavHostController, scrollState: ScrollState, paddingValues: PaddingValues) {
+fun Navigation(navController:NavHostController, scrollState: ScrollState,
+               paddingValues: PaddingValues, newsManager: NewsManager = NewsManager()) {
+    val articles = newsManager.newsResponse.value.articles
+
     NavHost(navController = navController, startDestination =BottomMenuScreen.TopNews.route,modifier = Modifier.padding(paddingValues)) {
         bottomNavigation(navController = navController)
         composable("Detail/{index}",
