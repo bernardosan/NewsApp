@@ -2,11 +2,11 @@ package com.bernardosan.newsapp.ui.screen
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,8 +23,6 @@ import androidx.navigation.compose.rememberNavController
 import com.bernardosan.newsapp.mock.MockNewsModel
 import com.bernardosan.newsapp.mock.MockNewsModel.getTimeAgo
 import com.bernardosan.newsapp.models.NewsModel
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavController, newsModel: NewsModel, scrollState: ScrollState){
 
@@ -71,7 +69,7 @@ fun DetailScreen(navController: NavController, newsModel: NewsModel, scrollState
 
 @Composable 
 fun DetailTopAppBar(onBackPressed: () -> Unit = {}){
-    SmallTopAppBar(
+    TopAppBar(
         title = { Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold, fontSize = 16.sp)},
         navigationIcon = {
             IconButton(onClick = { onBackPressed() }) {
