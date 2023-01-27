@@ -29,7 +29,7 @@ class NewsManager {
     }
 
     private fun getArticles(){
-        val service = API.service.getNews("pt", API.API_KEY)
+        val service = API.service.getNews("pt")
         service.enqueue(object: Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if(response.isSuccessful){
@@ -47,7 +47,7 @@ class NewsManager {
     }
 
     fun getArticlesByCategory(categoryName: String){
-        val service = API.service.getArticlesByCategory(category = categoryName, apiKey = API.API_KEY)
+        val service = API.service.getArticlesByCategory(category = categoryName)
         service.enqueue(object: Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if(response.isSuccessful){
