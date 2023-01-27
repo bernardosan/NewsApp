@@ -88,6 +88,6 @@ fun NavGraphBuilder.bottomNavigation(navController: NavController,
         )
     }
     composable(BottomMenuScreen.Sources.route) {
-        Sources()
+        Sources(newsManager = newsManager)
     }
 }
