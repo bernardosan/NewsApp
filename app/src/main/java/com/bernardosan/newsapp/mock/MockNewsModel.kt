@@ -107,10 +107,10 @@ object MockNewsModel {
             if (interval == 1) "$interval month ago" else "$interval years ago"
         } else if (hour < currentHour){
             val interval = currentHour-hour
-            if (interval == 1) "$interval hour ago" else "$interval hour ago"
+            if (interval == 1) "$interval hour ago" else "$interval hours ago"
         } else {
             val interval = currentMinute-minute
-            if (interval == 1) "$interval minute ago" else "$interval minute ago"
+            if (interval == 1) "$interval minute ago" else "$interval minutes ago"
         }
 
     }

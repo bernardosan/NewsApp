@@ -1,4 +1,4 @@
-package com.bernardosan.savedinstancebundledemo.network
+package com.bernardosan.newsapp.network
 
 import com.bernardosan.newsapp.models.Article
 import java.io.Serializable

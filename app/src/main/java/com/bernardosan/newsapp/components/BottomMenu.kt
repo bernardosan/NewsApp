@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.bernardosan.newsapp.models.BottomMenuScreen
 import com.bernardosan.newsapp.R
+import com.bernardosan.newsapp.ui.theme.Purple500
 
 
 @Composable
@@ -21,7 +22,7 @@ fun BottomMenu(navController:NavController) {
         BottomMenuScreen.Categories,
         BottomMenuScreen.Sources
     )
-    BottomNavigation(contentColor = colorResource(id = R.color.white))
+    BottomNavigation(contentColor = colorResource(id = R.color.white), backgroundColor = Purple500)
     {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

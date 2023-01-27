@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,6 +73,7 @@ fun TopNewsItem(article: Article, onClick: () -> Unit = {}){
                     fontSize = 10.sp,
                     textAlign = TextAlign.Justify,
                     maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
                     lineHeight = 15.sp,
                     modifier = Modifier
                         .padding(top = 6.dp, start = 12.dp, end = 12.dp, bottom = 6.dp)

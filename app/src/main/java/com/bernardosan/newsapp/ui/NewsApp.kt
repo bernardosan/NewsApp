@@ -17,7 +17,7 @@ import com.bernardosan.newsapp.ui.screen.Categories
 import com.bernardosan.newsapp.ui.screen.DetailScreen
 import com.bernardosan.newsapp.ui.screen.Sources
 import com.bernardosan.newsapp.ui.screen.TopNews
-import com.bernardosan.savedinstancebundledemo.network.NewsManager
+import com.bernardosan.newsapp.network.NewsManager
 import eu.tutorials.newsapp.components.BottomMenu
 
 @Composable
@@ -50,7 +50,7 @@ fun Navigation(navController:NavHostController, scrollState: ScrollState,
             startDestination = BottomMenuScreen.TopNews.route,
             modifier = Modifier.padding(paddingValues)
         ) {
-            bottomNavigation(navController = navController, articles)
+            bottomNavigation(navController = navController, articles, newsManager = newsManager)
             composable("Detail/{index}",
                 arguments = listOf(
                     navArgument("index") { type = NavType.IntType }
@@ -72,12 +72,20 @@ fun Navigation(navController:NavHostController, scrollState: ScrollState,
     }
 }
 
-fun NavGraphBuilder.bottomNavigation(navController: NavController, articles: List<Article>) {
+fun NavGraphBuilder.bottomNavigation(navController: NavController,
+                                     articles: List<Article>,
+                                     newsManager: NewsManager
+) {
     composable(BottomMenuScreen.TopNews.route) {
         TopNews(navController = navController, articles = articles)
     }
     composable(BottomMenuScreen.Categories.route) {
-        Categories()
+        Categories(newsManager = newsManager,
+            onFetchCategory = {
+                newsManager.onSelectedCategoryChanged(it)
+                newsManager.getArticlesByCategory(it)
+            },
+        )
     }
     composable(BottomMenuScreen.Sources.route) {
         Sources()

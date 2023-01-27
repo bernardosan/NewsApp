@@ -1,4 +1,4 @@
-package com.bernardosan.savedinstancebundledemo.network
+package com.bernardosan.newsapp.network
 
 import android.content.Context
 import android.net.ConnectivityManager
