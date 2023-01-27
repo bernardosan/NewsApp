@@ -22,7 +22,15 @@ class NewsManager {
         _getArticleByCategory
     }
 
+    private val _getArticleBySource = mutableStateOf(NewsResponse())
+    val getArticleSource: State<NewsResponse>
+        @Composable get() = remember {
+            _getArticleBySource
+        }
+
     val selectedCategory: MutableState<ArticleCategory?> = mutableStateOf(ArticleCategory.GENERAL)
+
+    val sourceName = mutableStateOf("abc-news")
 
     init {
         getArticles()
@@ -52,6 +60,24 @@ class NewsManager {
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if(response.isSuccessful){
                     _getArticleByCategory.value = response.body()!!
+                } else{
+                    Log.d("error", response.errorBody().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    fun getArticlesBySource(sourceName: String){
+        val service = API.service.getArticlesByCategory(sourceName)
+        service.enqueue(object: Callback<NewsResponse>{
+            override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                if(response.isSuccessful){
+                    _getArticleBySource.value = response.body()!!
                 } else{
                     Log.d("error", response.errorBody().toString())
                 }

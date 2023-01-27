@@ -13,11 +13,15 @@ interface NewsService {
         @Query("country") country: String,
     ): Call<NewsResponse>
 
-
     @GET("top-headlines")
     fun getArticlesByCategory(
         @Query("category") category: String,
         @Query("country") country: String = "pt"
+    ): Call<NewsResponse>
+
+    @GET("everything")
+    fun getArticlesBySources(
+        @Query("sources") source: String
     ): Call<NewsResponse>
 }
 // END
