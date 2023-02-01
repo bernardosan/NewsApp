@@ -67,6 +67,12 @@ fun DetailScreen(navController: NavController, article: Article, scrollState: Sc
 
             Text(text = article.description?:"Not Available",
                 textAlign = TextAlign.Justify,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(8.dp)
+            )
+
+            Text(text = article.content?:"Not Available",
+                textAlign = TextAlign.Justify,
                 modifier = Modifier.padding(8.dp)
             )
 
