@@ -72,8 +72,8 @@ class NewsManager {
         })
     }
 
-    fun getArticlesBySource(sourceName: String){
-        val service = API.service.getArticlesByCategory(sourceName)
+    fun getArticlesBySource(){
+        val service = API.service.getArticlesBySources(sourceName.value)
         service.enqueue(object: Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if(response.isSuccessful){
