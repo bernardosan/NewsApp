@@ -84,7 +84,7 @@ object MockNewsModel {
 
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val day = calendar.get(Calendar.DAY_OF_YEAR)
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
@@ -92,7 +92,7 @@ object MockNewsModel {
 
         val currentYear = currentCalendar.get(Calendar.YEAR)
         val currentMonth = currentCalendar.get(Calendar.MONTH)
-        val currentDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
+        val currentDay = currentCalendar.get(Calendar.DAY_OF_YEAR)
         val currentHour = currentCalendar.get(Calendar.HOUR_OF_DAY)
         val currentMinute = currentCalendar.get(Calendar.MINUTE)
 
@@ -102,9 +102,9 @@ object MockNewsModel {
         } else if (month < currentMonth){
                 val interval = currentMonth-month
                 if (interval == 1) "$interval month ago" else "$interval years ago"
-        } else if (day < currentDay) {
+        } else if ( day < currentDay ) {
             val interval = currentDay - day
-            if (interval == 1) "$interval month ago" else "$interval years ago"
+            if (interval == 1) "Yesterday" else "$interval days ago"
         } else if (hour < currentHour){
             val interval = currentHour-hour
             if (interval == 1) "$interval hour ago" else "$interval hours ago"

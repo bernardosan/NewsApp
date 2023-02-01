@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,7 +28,11 @@ import com.bernardosan.newsapp.models.Article
 import com.bernardosan.newsapp.models.ArticleCategory
 import com.bernardosan.newsapp.models.getAllCategory
 import com.bernardosan.newsapp.network.NewsManager
+import com.bernardosan.newsapp.ui.theme.Purple200
+import com.bernardosan.newsapp.ui.theme.Purple500
+import com.bernardosan.newsapp.ui.theme.Purple700
 import com.skydoves.landscapist.coil.CoilImage
+import okhttp3.internal.wait
 
 @Composable
 fun Categories(onFetchCategory: (String) -> Unit, newsManager: NewsManager){
@@ -58,8 +61,8 @@ fun Categories(onFetchCategory: (String) -> Unit, newsManager: NewsManager){
 fun CategoryTab(category: String, isSelected: Boolean = false,
                 onFetchCategory: (String) -> Unit){
     val background =
-        if(isSelected) colorResource(id = R.color.purple_200)
-        else colorResource(id = R.color.purple_700)
+        if(isSelected) Purple200
+        else Purple700
 
     Surface(
         modifier = Modifier
@@ -87,7 +90,7 @@ fun ArticleContent(articles: List<Article>, modifier: Modifier = Modifier){
         items(articles){
             article ->
             Card(modifier = Modifier.padding(8.dp),
-                border = BorderStroke(width = 2.dp, color = colorResource(id = R.color.purple_500)),
+                border = BorderStroke(width = 2.dp, color = Purple500),
             ) {
 
                 Row(
@@ -123,8 +126,8 @@ fun ArticleContent(articles: List<Article>, modifier: Modifier = Modifier){
                 }
 
                 Surface(color = Color.Black, modifier = Modifier.alpha(0.7f), ) {
-                    Text(text= article.publishedAt?.let { MockNewsModel.stringToDate(it) }?.getTimeAgo()?:"Not Available", overflow = TextOverflow.Clip,
-                        modifier = Modifier.padding(4.dp), fontSize = 12.sp)
+                    Text(text= if(article.publishedAt != null) MockNewsModel.stringToDate(article.publishedAt).getTimeAgo() else "Not Available", overflow = TextOverflow.Clip,
+                        modifier = Modifier.padding(4.dp), fontSize = 12.sp, color = Color.White)
                 }
 
             }
